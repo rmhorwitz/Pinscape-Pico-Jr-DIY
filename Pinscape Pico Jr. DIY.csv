@@ -1,0 +1,16 @@
+"","Sourced","Placed","References","Value","Footprint","Quantity"
+1,"","","C4, C5, C6","100nf","C_Disc_D3.0mm_W1.6mm_P2.50mm",3
+2,"","","R1, R2, R4","10K@1%","R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal",3
+3,"","","R3","2.2K","R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal",1
+4,"","","D1","1N5711","D_DO-35_SOD27_P7.62mm_Horizontal",1
+5,"","","U7, U8, U9","74HC165N","CERDIP-16_W7.62mm_SideBrazed_LongPads_Socket",3
+6,"","","U1","SC0915","SC0915_RPI",1
+7,"","","U2","ADS1115 module","PinHeader_1x10_P2.54mm_Vertical",1
+8,"","","U3","LIS3DSH Module","PinHeader_1x10_P2.54mm_Vertical",1
+9,"","","U4","MMA845","PinHeader_1x08_P2.54mm_Vertical",1
+10,"","","RN1, RN2, RN3","R_Network08_US","R_Array_SIP9",3
+11,"","","Q1","2N2222A","TO-92_Inline_Wide",1
+12,"","","J3, J5, J6","HPM-10-05","Samtec_HPM-10-01-x-S_Straight_1x10_Pitch5.08mm",3
+13,"","","J1","HPM-03-01","Samtec_HPM-03-05-x-S_Straight_1x03_Pitch5.08mm",1
+14,"","","J2","Conn_01x08_Pin","JST_XH_B8B-XH-A_1x08_P2.50mm_Vertical",1
+15,"","","J4","Conn_02x17_Odd_Even","IDC-Header_2x17_P2.54mm_Vertical",1
