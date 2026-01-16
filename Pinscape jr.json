@@ -1,0 +1,304 @@
+// Pinscape Pico Configuration
+// Based on Starter Template - Copyright 2024, 2025 Michael J Roberts / BSD-3-Clause license / NO WARRANTY
+
+{
+    // ---------------------------------------------------------------------
+    //
+    // Basic device setup
+    //
+
+    // Unit identification
+    id: {
+        // Every configuration should have a unit number, to identify the device to DOF.
+        unitNum: 1,
+
+        // The unit name is just for display purposes, to help YOU tell your Pinscape Pico units apart.
+        unitName: "Main Pico",
+
+        // Emulated LedWiz ID.  This is for use by an LedWiz API emulator
+        // on the PC host. Set this to 0 to disable emulation for this Pico.
+        ledWizUnitNum: 1,
+    },
+
+    serialPorts: {
+        // USB virtual COM port (CDC port). Set the terminal to 8 data bits, 1 stop bit, no parity, 115200 baud.
+        usb: {
+            logging: true,       // enable logging on this port
+            console: {
+                enable: true,    // enable the interactive command line on this port
+                bufSize: 2048,   // buffer size for console output
+            },
+        },
+    },
+
+    logging: {
+        filter: "error warning info config",
+        bufSize: 8192,
+        timestamps: true,
+        typeCodes: true,
+        colors: true,
+    },
+
+
+    // ---------------------------------------------------------------------
+    //
+    // USB virtual device setup.
+
+    // HID keyboard interface.  Sends keyboard keystrokes to the PC.
+    keyboard: {
+        enable: true,
+    },
+
+    // HID gamepad interface.  Emulates a Windows gamepad
+    gamepad: {
+        enable: true,       // enable the gamepad emulation
+        x: "nudge.x",       // connect the accelerometer X axis to the joystick X axis
+        y: "nudge.y",       // ditto for the Y axis
+        z: "plunger.z",     // connect the plunger position reading to the joystick Z axis
+    },
+
+    // Open Pinball Device HID.  Sends nudge, plunger, and button press information
+    // via a dedicated, pinball-specific virtual device.
+    openPinballDevice: {
+        enable: true,
+    },
+
+    // -------------------------------------------------------------------
+    //
+    // Buttons.  This section sets up the mappings between your
+    // physical button input ports and the actions that the buttons
+    // invoke.
+
+   "74hc165": {
+        nChips: 3,
+        data: 18,
+        shift: 19,
+        load: 20,
+     
+     // nChips: 3,       // the numer of chips chained together in the daisy chain
+     // shld: 20,         // GPIO port number connected to 74HC165 SH/LD (shift/load) pin
+     // clk: 19,          // GPIO port number connected to 74HC165 CLK (serial clock) pin
+     // ser: 18,          // GPIO port number connected to 74HC165 SER (serial data) pin
+     // loadPolarity: false,   // SH/LD logical level; always false for 74HC165
+      shiftClockFreq: 6000000,
+     },
+    buttons: [
+    
+	 // Button #0
+        { 
+            source: { type: "74hc165", chip: 0, port: "A", active: "low", },
+            action: { type: "key", key: "left shift" },  // Left Shift = left flipper button
+        },
+
+        // Button #1
+        { 
+            source: { type: "74hc165", chip: 0, port: "B", active: "low", },
+            action: { type: "key", key: "right shift" }, // Right Shift = right flipper button
+        },
+
+
+        // Button #2
+        { 
+            source: { type: "74hc165", chip: 0, port: "C", active: "low", },
+            action: { type: "key", key: "left windows" }, // Left Windows key = left 2nd flipper switch (for double-leaf switches)
+        },
+
+        // Button #3
+        { 
+            source: { type: "74hc165", chip: 0, port: "D", active: "low", },
+            action: { type: "key", key: "right alt" }, // Right Alt key = right 2nd flipper switch (for double-leaf switches)
+        },
+
+
+        // Button #4
+        { 
+            source: { type: "74hc165", chip: 0, port: "E", active: "low", },
+            action: { type: "key", key: "left ctrl" }, // Left Ctrl = left MagnaSave button
+        },
+
+
+        // Button #5
+        { 
+            source: { type: "74hc165", chip: 0, port: "F", active: "low", },
+            action: { type: "key", key: "right ctrl" }, // Right Ctrl = right MagnaSave button
+        },
+
+        // Button #6
+        { 
+            source: { type: "74hc165", chip: 0, port: "G", active: "low", },
+            action: { type: "key", key: "1" },     // "1" = Start button
+        },
+
+
+        // Button #7
+        { 
+            source: { type: "74hc165", chip: 0, port: "H", active: "low", },
+            action: { type: "key", key: "esc" },   // "Esc" = Exit button
+        },
+
+
+        // Button #8
+        { 
+            source: { type: "74hc165", chip: 1, port: "A", active: "low", },
+            action: { type: "key", key: "3" },     // "3" = left coin chute switch
+        },
+
+
+        // Button #9
+        { 
+            source: { type: "74hc165", chip: 1, port: "B", active: "low", },
+            action: { type: "key", key: "4" },     // "4" = middle coin chute switch
+        },
+
+
+        // Button #10
+        { 
+            source: { type: "74hc165", chip: 1, port: "C", active: "low", },
+            action: { type: "key", key: "5" },     // "5" = right coin chute switch
+        },
+
+
+        // Button #11
+        { 
+            source: { type: "74hc165", chip: 1, port: "D", active: "low", },
+            action: { type: "key", key: "6" },     // "6" = fourth coin chute/dollar bill acceptor switch
+        },
+
+
+        // Button #12
+        { 
+            source: { type: "74hc165", chip: 1, port: "E", active: "low", },
+            action: { type: "key", key: "enter" }, // Enter = Launch Ball
+        },
+
+
+        // Button #13
+        { 
+            source: { type: "74hc165", chip: 1, port: "F", active: "low", },
+            action: { type: "key", key: "0" },     // "0" = operator control panel enter/select
+        },
+
+
+        // Button #14
+        { 
+            source: { type: "74hc165", chip: 1, port: "G", active: "low", },
+            action: { type: "key", key: "9" },     // "9" = operator control panel next/up
+        },
+
+
+        // Button #15
+        { 
+            source: { type: "74hc165", chip: 1, port: "H", active: "low", },
+            action: { type: "key", key: "8" },     // "8" = operator control panel previous/down
+        },
+
+        // Button #16
+        { 
+            source: { type: "74hc165", chip: 2, port: "A", active: "low", },
+            action: { type: "key", key: "7" },     // "7" = operator control panel cancel/exit
+        },
+
+        // Button #17
+        { 
+            source: { type: "74hc165", chip: 2, port: "B", active: "low", },
+            action: { type: "key", key: "end" },   // End = coin door open/closed switch
+        },
+
+        // Button #18
+        { 
+            source: { type: "74hc165", chip: 2, port: "C", active: "low", },
+            action: { type: "key", key: "2" },     // "2" = Extra Ball/Buy-In Button
+        },
+
+        // Button #19
+        { 
+            source: { type: "74hc165", chip: 2, port: "D", active: "low", },
+            action: { type: "key", key: "T" },     // "T" = tilt bot
+        },
+
+        // Button #20
+        { 
+            source: { type: "74hc165", chip: 2, port: "E", active: "low", },
+            action: { type: "key", key: "home" },  // Home = slam tilt switch
+        },
+
+        // Button #21
+        { 
+            source: { type: "74hc165", chip: 2, port: "F", active: "low", },
+            action: { type: "key", key: "+" },     // VP Volume Up
+        },
+
+        // Button #22
+        { 
+            source: { type: "74hc165", chip: 2, port: "G", active: "low", },
+            action: { type: "key", key: "-" },     // VP Volume Down
+        },
+
+        // Button #23
+        { 
+            source: { type: "74hc165", chip: 2, port: "H", active: "low", },
+            action: { type: "gamepad", button: 1 }, // gamepad button 1 (no pre-assigned meaning)
+        },
+
+    ],
+   outputs: [
+        { device: { type: "gpio", gp: 0, pwm: true }, },  // DOF output #1 -> Out_0
+        { device: { type: "gpio", gp: 1, pwm: true }, },  // DOF output #2 -> Out_1
+        { device: { type: "gpio", gp: 2, pwm: true }, },  // DOF output #3 -> Out_2
+        { device: { type: "gpio", gp: 3, pwm: true }, },  // DOF output #4 -> Out_3
+        { device: { type: "gpio", gp: 6, pwm: true }, },  // DOF output #5 -> Out_4
+        { device: { type: "gpio", gp: 7, pwm: true }, },  // DOF output #6 -> Out_5
+        { device: { type: "gpio", gp: 8, pwm: true }, },  // DOF output #7 -> Out_6
+        { device: { type: "gpio", gp: 9, pwm: true }, },  // DOF output #8 -> Out_7
+        { device: { type: "gpio", gp: 10, pwm: true }, },  // DOF output #8 -> Out_8
+        { device: { type: "gpio", gp: 11, pwm: true }, },  // DOF output #8 -> Out_9
+        { device: { type: "gpio", gp: 12, pwm: true }, },  // DOF output #8 -> Out_10
+        { device: { type: "gpio", gp: 13, pwm: true }, },  // DOF output #8 -> Out_11
+	{ device: { type: "gpio", gp: 14, pwm: true }, },  // DOF output #8 -> Out_12
+        { device: { type: "gpio", gp: 15, pwm: true }, },  // DOF output #8 -> Out_13
+        { device: { type: "gpio", gp: 16, pwm: true }, },  // DOF output #8 -> Out_14
+        { device: { type: "gpio", gp: 17, pwm: true }, },  // DOF output #8 -> Out_15
+    ],
+   // default PWM frequency for Pico GPIO outputs
+    pwm: {
+        defaultFreq: 20000,
+    },
+
+    // -------------------------------------------------------------------
+    //
+  nudge: {
+        source: "lis3dh",
+        x: "+X",
+        y: "+Y",
+        z: "+Z",
+       },
+    // -------------------------------------------------------------------
+    //
+    // LIS3DH I2C accelerometer
+    //
+     lis3dh: {
+         i2c: 0,            // I2C bus - 0 for I2C0, 1 for I2C1
+         addr: 0x19,        // I2C address: 0x18 if SDO/SA0 is wired to GND, 0x19 if wired to 3.3V
+         interrupt: 22,   // GPIO port connected to interrupt pin; omit this line if interrupt line isn't wired
+         gRange: 2,         // dynamic range +/- 2g
+     },
+      i2c0: {
+         sda: 4,           // GPIO port of I2C0 SDA (serial data) connection
+         scl: 5,           // GPIO port of I2C0 SCL (serial clock) connection
+         speed: 500000,    // bus speed, bits per second
+     },
+
+     plunger: {
+         source: "pico_adc",   // source sensor type; usually inferred automatically from available sensors
+         autoZero: true,       // enable auto-zeroing; only applies to quadrature sensors, ignored otherwise
+         autoZeroTime: 5000,   // time in milliseconds for auto-zeroing; plunger must be stationary this long to auto-zero
+    //     powerLaw: 2,          // power-law exponent in brightness-to-distance calculation, only for VCNL4010
+     },
+    
+     pico_adc: {
+         gpio: 28,
+     },
+
+}
+
+
